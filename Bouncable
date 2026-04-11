@@ -9,6 +9,7 @@ class Bouncable {
     }
 
     draw(){
+
         fill(this.color);
         circle(this.x, this.y, this.size);
         
@@ -22,5 +23,28 @@ class Bouncable {
             this.direction = (this.direction - 180) * -1;
         }
     }
+}
+
+function setupBoucables() {
+
+      for (var i = 0; i < random(20, 100); i++){
+    bouncables.push(new Bouncable(
+    color(random(0, 255), random(0, 255), random(0,255)),
+    random(50, 350),
+    random(50, 350),
+    random(15, 50),
+    random(0.3, 4),
+    random(0, 360),
+  ));
+  }
+
+}
+
+function drawBouncables() {
+    
+      for (var i = 0; i < bouncables.length; i++){
+    bouncables[i].draw();
+  }
+
 }
 
