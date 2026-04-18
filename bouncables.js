@@ -30,13 +30,13 @@ var bouncables = [];
 function setupBouncables() {
     bouncables = []
 
-    for (var i = 0; i < 1; i++) {
+    for (var i = 0; i < 25; i++) {
         bouncables.push(new Bouncable(
             color(random(30, 255), random(30, 255), random(30, 255)),
             random(50, 350), 
             random(50, 350), 
             random(15, 80), 
-            random(1, 6), 
+            random(2, 6), 
             random(0, 360)
         ));
     }

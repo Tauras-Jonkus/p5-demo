@@ -1,0 +1,5 @@
+function drawSnake() {
+}
+
+function setupSnake() {
+}
