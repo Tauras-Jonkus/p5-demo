@@ -1,24 +1,40 @@
-const cellSize = 25;
+const cellSize = 50;
 const directionInitial = 'd';
 
 const snakeHead = {
+    direction: null,
     image: null,
-    positionX: 50,
-    positionY: 50,
-    sizeX: 50,
-    sizeY: 50,
+    positionX: null,
+    positionY: null,
+    sizeX: cellSize,
+    sizeY: cellSize,
 };
 
-let direction = directionInitial;
+
 
 function drawHead() {
+    angleMode(DEGREES);
+    push();
+    translate(snakeHead.positionX, snakeHead.positionY);
+
+    if (snakeHead.direction === 'r') {
+            rotate(-90);
+        }else if (snakeHead.direction === 'l') {
+            rotate(90);
+        }else if (snakeHead.direction === 'u') {
+            rotate(180);
+        };
+
+        imageMode(CENTER);
     image(
         snakeHead.image,
-        snakeHead.positionX,
-        snakeHead.positionY,
+        0,
+        0,
         snakeHead.sizeX,
         snakeHead.sizeY,
     );
+    pop();
+    angleMode(RADIANS);
 }
 
 function drawGrid() {
@@ -34,13 +50,13 @@ function drawGrid() {
 function drawSnake() {
     drawGrid();
 
-        if (direction === 'r') {
+        if (snakeHead.direction === 'r') {
             snakeHead.positionX += cellSize;
-        }else if (direction === 'l') {
+        }else if (snakeHead.direction === 'l') {
             snakeHead.positionX -= cellSize;
-        }else if (direction === 'u') {
+        }else if (snakeHead.direction === 'u') {
             snakeHead.positionY -= cellSize;
-        }else if (direction === 'd') {
+        }else if (snakeHead.direction === 'd') {
             snakeHead.positionY += cellSize;
         }
 
@@ -48,18 +64,22 @@ function drawSnake() {
 }
 
 function keyPressedSnake() {
-    if (key === 'ArrowLeft' && direction !== 'r'){
-        direction = 'l';
-    }else if (key === 'ArrowRight' && direction !== 'l'){
-        direction = 'r';
-    }else if (key === 'ArrowDown' && direction !== 'u'){
-        direction = 'd';
-    }else if (key === 'ArrowUp' && direction !== 'd'){
-        direction = 'u';
+    if (key === 'ArrowLeft' && snakeHead.direction !== 'r'){
+        snakeHead.direction = 'l';
+    }else if (key === 'ArrowRight' && snakeHead.direction !== 'l'){
+        snakeHead.direction = 'r';
+    }else if (key === 'ArrowDown' && snakeHead.direction !== 'u'){
+        snakeHead.direction = 'd';
+    }else if (key === 'ArrowUp' && snakeHead.direction !== 'd'){
+        snakeHead.direction = 'u';
     }
 }
 
 function setupSnake() {
+    snakeHead.direction = directionInitial
     snakeHead.image = loadImage('images/snakeHead.png');
+    snakeHead.positionX = cellSize * 2 + cellSize / 2
+    snakeHead.positionY = cellSize * 2 + cellSize / 2
 }
+
 

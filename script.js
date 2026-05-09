@@ -1,4 +1,6 @@
 function projectSelected() {
+
+
     const projectsSelect = document.getElementById('projects');
 
     frameRate(60);
@@ -18,7 +20,7 @@ function projectSelected() {
         keyPressedScript = keyPressedSnake;
         setupScript = setupSnake;
         drawScript = drawSnake;
-        frameRate(3);
+        frameRate(2);
 
     }
 
