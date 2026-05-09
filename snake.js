@@ -47,7 +47,25 @@ function drawGrid() {
     }
 }
 
+const food = {
+    image: null,
+    positionX: null,
+    positionY: null,
+    sizeX: cellSize,
+    sizeY: cellSize
+
+
+}
+
 function drawSnake() {
+    image(
+        food.image,
+        cellSize * food.positionX,
+        cellSize * food.positionY,
+        snakeHead.sizeX,
+        snakeHead.sizeY,
+    );
+
     drawGrid();
 
         if (snakeHead.direction === 'r') {
@@ -75,7 +93,22 @@ function keyPressedSnake() {
     }
 }
 
+function getRandomfoodPosition() {
+    const countCellX = canvasX / cellSize;
+    const countCellY = canvasY / cellSize;
+
+    return{
+        x: Math.floorMath.random() * countCellX + 1,
+        y: Math.floorMath.random() * countCellX - 1
+
+    };
+}
+
 function setupSnake() {
+    food.image = loadIamge('images/food.png');
+    food.positionX = getRandomfoodPosition().X;
+    food.positionY = getRandomfoodPosition().Y;
+
     snakeHead.direction = directionInitial
     snakeHead.image = loadImage('images/snakeHead.png');
     snakeHead.positionX = cellSize * 2 + cellSize / 2
