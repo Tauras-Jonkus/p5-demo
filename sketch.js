@@ -2,8 +2,8 @@ var setupScript = function() {};
 var drawScript = function() {};
 var keyPressedScript = function() {};
 
-var canvasX = 600;
-var canvasY = 600;
+var canvasX = 400;
+var canvasY = 400;
 
 
 function setup() {
