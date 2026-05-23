@@ -1,8 +1,8 @@
 const cellSize = 50;
 const directionInitial = 'r';
 
+const tail = [];
 
-const tail = []
 
 const snakeHead = {
     cellX: null,
@@ -13,9 +13,7 @@ const snakeHead = {
     sizeY: cellSize
 };
 
-const snakeHeadBody = {
-    cellX: null,
-    cellY: null,
+const snakeTailSegment = {
     image: null,
     sizeX: cellSize,
     sizeY: cellSize
@@ -72,13 +70,7 @@ function drawGrid() {
 function drawSnake() {
     drawGrid();
 
-    image(
-        food.image,
-        cellSize * food.cellX,
-        cellSize * food.cellY,
-        food.sizeX,
-        food.sizeY
-    );
+    drawTail();
 
     if (snakeHead.direction === 'r') {
         snakeHead.cellX += 1;
@@ -90,16 +82,25 @@ function drawSnake() {
         snakeHead.cellY += 1;
     }
 
-    if (snakeHead.cellX === food.cellX && snakeHead.cellY === food.cellY){
-    food.cellX = getRandomFoodCellPosition().x;
-    food.cellY = getRandomFoodCellPosition().y;
+    if (snakeHead.cellX === food.cellX && snakeHead.cellY === food.cellY) {
+        const newFoodPosition = getRandomFoodCellPosition();
 
-    tail.push({
-        cellX: (0).cellX,
-        cellY: (0).cellY
-    });
+        food.cellX = newFoodPosition.x;
+        food.cellY = newFoodPosition.y;
 
+        tail.unshift({
+            cellX: tail[0].cellX,
+            cellY: tail[0].cellY
+        });
     }
+
+    image(
+        food.image,
+        cellSize * food.cellX,
+        cellSize * food.cellY,
+        food.sizeX,
+        food.sizeY
+    );
 
     drawHead();
 }
@@ -110,21 +111,22 @@ function drawTail() {
     while (index <= tail.length - 2) {
         tail[index].cellX = tail[index + 1].cellX;
         tail[index].cellY = tail[index + 1].cellY;
+
+        index++;
     }
-    tail[tail.length - 1 ].cellX = snakeHead.cellX;
-    tail[tail.length - 1 ].cellY = snakeHead.cellY;
 
-    tail.forEach(body) == (
+    tail[tail.length - 1].cellX = snakeHead.cellX;
+    tail[tail.length - 1].cellY = snakeHead.cellY;
+
+    tail.forEach((segment) => {
         image(
-        snakeHeadBody.image,
-        body.cellX * cellSize,
-        body.cellY * cellSize,
-        snakeHeadBody.sizeX,
-        snakeHeadBody.sizeY
-
-        )
-    )
-
+            snakeTailSegment.image,
+            segment.cellX * cellSize,
+            segment.cellY * cellSize,
+            snakeTailSegment.sizeX,
+            snakeTailSegment.sizeY
+        );
+    });
 }
 
 function keyPressedSnake() {
@@ -150,19 +152,19 @@ function getRandomFoodCellPosition() {
 }
 
 function setupSnake() {
-    food.image = loadImage('images/food.png');
+    food.image = loadImage('assets/images/food.png');
     food.cellX = getRandomFoodCellPosition().x;
     food.cellY = getRandomFoodCellPosition().y;
 
     snakeHead.direction = directionInitial;
-    snakeHead.image = loadImage('images/snakeHead.png');
+    snakeHead.image = loadImage('assets/images/snake-head.png');
     snakeHead.cellX = 2;
     snakeHead.cellY = 2;
 
-    snakeHeadBody.image = loadImage('images/snakeBody.png');
+    snakeTailSegment.image = loadImage('assets/images/snake-segment.png');
 
     tail.length = 0;
-
+    
     tail.push({
         cellX: null,
         cellY: null
