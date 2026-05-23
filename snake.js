@@ -152,16 +152,16 @@ function getRandomFoodCellPosition() {
 }
 
 function setupSnake() {
-    food.image = loadImage('assets/images/food.png');
+    food.image = loadImage('images/food.png');
     food.cellX = getRandomFoodCellPosition().x;
     food.cellY = getRandomFoodCellPosition().y;
 
     snakeHead.direction = directionInitial;
-    snakeHead.image = loadImage('assets/images/snake-head.png');
+    snakeHead.image = loadImage('images/snakeHead.png');
     snakeHead.cellX = 2;
     snakeHead.cellY = 2;
 
-    snakeTailSegment.image = loadImage('assets/images/snake-segment.png');
+    snakeTailSegment.image = loadImage('images/snakeBody.png');
 
     tail.length = 0;
     

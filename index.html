@@ -18,8 +18,8 @@
     <script src="flags.js"></script>
     <script src="snake.js"></script>
     <script src="script.js"></script>
-
-    <label for="projects">Select a project:</label>
+    <div id="p5-wrapper"> 
+      <label for="projects">Select a project:</label>
 
     <select id="projects" onchange="projectSelected()">
       <option disabled selected></option>
@@ -27,5 +27,8 @@
       <option value="flags">Flags</option>
       <option value="snake">Snake</option>
     </select>
+
+    <div id="p5-canvas"></div>
+    </div>
   </body>
 </html>
